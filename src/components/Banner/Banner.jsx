@@ -37,8 +37,8 @@ const Banner = () => {
 
   return (
     <div className="py-8">
-      <section className="md:w-11/12 m-auto grid grid-cols-1 md:grid-cols-12 gap-6">
-        <div className="md:col-span-8 overflow-hidden relative">
+      <section className="w-11/12 m-auto grid grid-cols-1 lg:grid-cols-12 gap-6">
+        <div className="md:col-span-8 relative overflow-hidden">
           <Swiper
             modules={[Autoplay, Pagination]}
             autoplay={{ delay: 3000 }}
@@ -48,21 +48,66 @@ const Banner = () => {
           >
             {randomProducts.map((product) => (
               <SwiperSlide key={product._id}>
-                <div className="flex flex-col md:flex-row w-full h-72 md:h-96 lg:h-112 bg-white rounded-3xl overflow-hidden transition-shadow duration-500">
-                  <div className="flex flex-col justify-center px-6 md:px-12 lg:px-16 w-full md:w-1/2 h-full rounded-l-3xl">
-                    <h2 className="text-2xl md:text-3xl lg:text-4xl font-extrabold text-gray-900 mb-3 drop-shadow-lg">
+                <div
+                  className="
+            flex flex-col-reverse 
+            md:flex-row 
+            w-full 
+
+            /* Better responsive height handling */
+            h-[420px]  
+            sm:h-[460px] 
+            md:h-[500px] 
+            lg:h-[560px] 
+            xl:h-[620px]
+
+            bg-white 
+            rounded-3xl 
+            overflow-hidden 
+            transition-shadow 
+            duration-500
+          "
+                >
+                  <div
+                    className="
+              flex flex-col justify-center 
+              px-5 sm:px-8 md:px-10 lg:px-14
+              w-full md:w-1/2 
+              h-1/2 md:h-full
+            "
+                  >
+                    <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-gray-900 mb-3 leading-tight">
                       {product.title}
                     </h2>
-                    <p className="text-lg md:text-xl lg:text-2xl font-semibold text-amber-600 mb-5 drop-shadow-md">
+
+                    <p className="text-xl md:text-2xl lg:text-3xl font-semibold text-amber-600 mb-6">
                       ${product.price}
                     </p>
+
                     <Link href={`/product/${product._id}`}>
-                      <button className="bg-amber-500 hover:bg-amber-600 text-white font-semibold px-6 py-3 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 w-max cursor-pointer">
+                      <button
+                        className="
+                bg-amber-500 hover:bg-amber-600 
+                text-white font-semibold 
+                px-5 sm:px-6 md:px-7 
+                py-2.5 sm:py-3 
+                rounded-xl 
+                shadow-lg hover:shadow-2xl 
+                transition-all duration-300 
+                w-max
+              "
+                      >
                         View Product
                       </button>
                     </Link>
                   </div>
-                  <div className="relative w-full md:w-1/2 h-64 md:h-full">
+                  <div
+                    className="
+    relative 
+    w-full md:w-1/2
+    h-56 sm:h-64 md:h-[420px] lg:h-[480px] xl:h-[520px]
+  "
+                  >
                     <Image
                       src={
                         product.image_url ||
@@ -70,8 +115,13 @@ const Banner = () => {
                       }
                       alt={product.title || "Product Image"}
                       fill
-                      style={{ objectFit: "cover" }}
-                      className="rounded-tr-3xl rounded-br-3xl transition-transform duration-500 hover:scale-105"
+                      priority={false}
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                      className="
+      object-cover
+      rounded-t-3xl md:rounded-none md:rounded-r-3xl
+      transition-transform duration-500 hover:scale-105
+    "
                     />
                   </div>
                 </div>
@@ -79,6 +129,7 @@ const Banner = () => {
             ))}
           </Swiper>
         </div>
+
         <div className="md:col-span-4 flex flex-col gap-6">
           <div
             className="relative group h-full p-0.5 rounded-3xl shadow-xl hover:shadow-2xl hover:opacity-80 transition-all duration-500
