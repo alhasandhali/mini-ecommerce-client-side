@@ -53,13 +53,11 @@ const Banner = () => {
             flex flex-col-reverse 
             md:flex-row 
             w-full 
-
-            /* Better responsive height handling */
             h-[420px]  
             sm:h-[460px] 
-            md:h-[500px] 
+            md:h-[450px] 
             lg:h-[560px] 
-            xl:h-[620px]
+            xl:h-[550px]
 
             bg-white 
             rounded-3xl 
@@ -105,7 +103,11 @@ const Banner = () => {
                     className="
     relative 
     w-full md:w-1/2
-    h-56 sm:h-64 md:h-[420px] lg:h-[480px] xl:h-[520px]
+    h-60
+    sm:h-72
+    md:h-[420px]
+    lg:h-[480px]
+    xl:h-[520px]
   "
                   >
                     <Image
@@ -118,9 +120,10 @@ const Banner = () => {
                       priority={false}
                       sizes="(max-width: 768px) 100vw, 50vw"
                       className="
-      object-cover
+      object-contain
       rounded-t-3xl md:rounded-none md:rounded-r-3xl
-      transition-transform duration-500 hover:scale-105
+      transition-transform duration-500
+      p-3 sm:p-4 md:p-6
     "
                     />
                   </div>
@@ -133,9 +136,9 @@ const Banner = () => {
         <div className="md:col-span-4 flex flex-col gap-6">
           <div
             className="relative group h-full p-0.5 rounded-3xl shadow-xl hover:shadow-2xl hover:opacity-80 transition-all duration-500
-               bg-[linear-gradient(135deg,#facc15,#f59e0b,#d97706)] cursor-pointer"
+               bg-[linear-gradient(135deg,#facc15,#f59e0b,#d97706)] cursor-pointer flex items-center justify-center"
           >
-            <div className="flex flex-col justify-between p-6 md:p-8">
+            <div className="flex flex-col items-center justify-center">
               <div>
                 <h2 className="text-2xl md:text-3xl font-extrabold text-white drop-shadow">
                   🔥 Special Deal
@@ -152,9 +155,9 @@ const Banner = () => {
           </div>
           <div
             className="relative group h-full p-0.5 rounded-3xl shadow-xl hover:shadow-2xl hover:opacity-80 transition-all duration-500
-               bg-[linear-gradient(135deg,#ef4444,#ec4899,#8b5cf6)] cursor-pointer"
+               bg-[linear-gradient(135deg,#ef4444,#ec4899,#8b5cf6)] cursor-pointer flex items-center justify-center"
           >
-            <div className="flex flex-col justify-between p-6 md:p-8">
+            <div className="flex flex-col justify-between items-center">
               <div>
                 <h2 className="text-2xl md:text-3xl font-extrabold text-white drop-shadow">
                   🎁 Mega Offer
