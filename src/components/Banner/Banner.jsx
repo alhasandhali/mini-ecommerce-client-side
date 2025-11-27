@@ -135,7 +135,7 @@ const Banner = () => {
 
         <div className="md:col-span-4 flex flex-col gap-6">
           <div
-            className="relative group h-full p-0.5 rounded-3xl shadow-xl hover:shadow-2xl hover:opacity-80 transition-all duration-500
+            className="relative group h-full py-5 rounded-3xl shadow-xl hover:shadow-2xl hover:opacity-80 transition-all duration-500
                bg-[linear-gradient(135deg,#facc15,#f59e0b,#d97706)] cursor-pointer flex items-center justify-center"
           >
             <div className="flex flex-col items-center justify-center">
@@ -154,7 +154,7 @@ const Banner = () => {
             </div>
           </div>
           <div
-            className="relative group h-full p-0.5 rounded-3xl shadow-xl hover:shadow-2xl hover:opacity-80 transition-all duration-500
+            className="relative group h-full py-5 rounded-3xl shadow-xl hover:shadow-2xl hover:opacity-80 transition-all duration-500
                bg-[linear-gradient(135deg,#ef4444,#ec4899,#8b5cf6)] cursor-pointer flex items-center justify-center"
           >
             <div className="flex flex-col justify-between items-center">
