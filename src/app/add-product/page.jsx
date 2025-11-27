@@ -4,8 +4,11 @@ import { useForm } from "react-hook-form";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import { useState } from "react";
+import Loader from "@/components/Loader/Loader";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
-export default function AddProduct() {
+const AddProduct = () => {
   const {
     register,
     handleSubmit,
@@ -27,10 +30,17 @@ export default function AddProduct() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["products"] });
       reset();
-      alert("Product added successfully!");
+      toast.success("Product added successfully!", {
+        position: "top-right",
+        autoClose: 3000,
+      });
     },
     onError: (error) => {
       setServerError(error?.response?.data?.message || "Failed to add product");
+      toast.error(error?.response?.data?.message || "Failed to add product", {
+        position: "top-right",
+        autoClose: 3000,
+      });
     },
   });
 
@@ -52,7 +62,6 @@ export default function AddProduct() {
       <h1 className="text-3xl font-bold mb-6 text-center text-blue-600">
         Add New Product
       </h1>
-
       {serverError && (
         <p className="text-red-500 mb-4 text-center font-medium">
           {serverError}
@@ -63,7 +72,6 @@ export default function AddProduct() {
         onSubmit={handleSubmit(onSubmit)}
         className="grid grid-cols-1 md:grid-cols-2 gap-6"
       >
-        {/* Shared Input Component */}
         {[
           { name: "sku", label: "SKU", required: true },
           { name: "title", label: "Title", required: true },
@@ -93,7 +101,6 @@ export default function AddProduct() {
         ].map((field, index) => (
           <div key={index} className="flex flex-col">
             <label className="font-medium mb-1">{field.label}</label>
-
             <input
               type={field.type || "text"}
               step={field.step}
@@ -103,7 +110,6 @@ export default function AddProduct() {
               )}
               className="w-full border px-4 py-2 rounded-lg bg-white shadow-sm focus:ring-2 focus:ring-blue-500 outline-none"
             />
-
             {errors[field.name] && (
               <p className="text-red-500 text-sm mt-1">
                 {errors[field.name]?.message}
@@ -111,8 +117,6 @@ export default function AddProduct() {
             )}
           </div>
         ))}
-
-        {/* Relevant */}
         <div>
           <label className="font-medium mb-1">Relevant</label>
           <select
@@ -123,8 +127,6 @@ export default function AddProduct() {
             <option value="false">No</option>
           </select>
         </div>
-
-        {/* Category */}
         <div className="md:col-span-2">
           <label className="font-medium mb-1">Category</label>
           <select
@@ -140,7 +142,6 @@ export default function AddProduct() {
             <p className="text-red-500 text-sm">{errors.category.message}</p>
           )}
         </div>
-        {/* Full Description — Full Width */}
         <div className="md:col-span-2">
           <label className="font-medium mb-1">Full Description</label>
           <textarea
@@ -156,18 +157,17 @@ export default function AddProduct() {
             </p>
           )}
         </div>
-
-        {/* Submit Button */}
         <div className="md:col-span-2 flex justify-center mt-4">
           <button
             type="submit"
-            className="bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold text-lg 
-            hover:bg-blue-700 transition shadow-md w-full md:w-auto"
+            className="bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold text-lg hover:bg-blue-700 transition shadow-md w-full md:w-auto flex items-center justify-center gap-2"
+            disabled={addProductMutation.isLoading}
           >
-            {addProductMutation.isLoading ? "Adding..." : "Add Product"}
+            {addProductMutation.isLoading ? <Loader /> : "Add Product"}
           </button>
         </div>
       </form>
     </div>
   );
-}
+};
+export default AddProduct;

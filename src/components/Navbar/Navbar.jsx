@@ -6,6 +6,7 @@ import "./Navbar.css";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { signOut } from "next-auth/react";
+import Loader from "../Loader/Loader";
 
 const Navbar = () => {
   const navLinkStyle = "text-sm md:text-lg rounded-none";
@@ -43,16 +44,93 @@ const Navbar = () => {
               className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
             >
               <li>
-                <a>Item 1</a>
+                {isLoading ? (
+                  <Loader></Loader>
+                ) : user ? (
+                  <div className="dropdown dropdown-end">
+                    <button tabIndex={0} className="btn btn-ghost">
+                      {user.name || user.email}
+                    </button>
+                    <ul
+                      tabIndex="-1"
+                      className="menu menu-sm dropdown-content bg-base-100 rounded-box mt-3 w-52 p-2 shadow"
+                    >
+                      <li>
+                        <Link
+                          href="/add-product"
+                          className="block w-full text-sm"
+                        >
+                          Add Product
+                        </Link>
+                      </li>
+                      <li>
+                        <Link
+                          href="/manage-products"
+                          className="block w-full text-sm"
+                        >
+                          Manage Products
+                        </Link>
+                      </li>
+                      <li>
+                        <a
+                          className="block w-full text-sm"
+                          onClick={() => signOut({ callbackUrl: "/" })}
+                        >
+                          Logout
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                ) : (
+                  ""
+                )}
               </li>
               <li>
-                <a>Item 2</a>
+                <Link href="/all-products" className={navLinkStyle}>
+                  Products
+                </Link>
               </li>
               <li>
-                <a>Item 3</a>
+                <details>
+                  <summary className={navLinkStyle}>Categories</summary>
+                  <ul className="p-2 z-10">
+                    <li>
+                      <Link href="/all-products?category=Laptop">Laptop</Link>
+                    </li>
+                    <li>
+                      <Link href="/all-products?category=Phone">Phone</Link>
+                    </li>
+                    <li>
+                      <Link href="/all-products?category=Camera">Camera</Link>
+                    </li>
+                  </ul>
+                </details>
               </li>
               <li>
-                <a>Item 4</a>
+                <Link href="/about" className={navLinkStyle}>
+                  About
+                </Link>
+              </li>
+              <li>
+                <Link href="/contact" className={navLinkStyle}>
+                  Contact
+                </Link>
+              </li>
+              <li>
+                {isLoading ? (
+                  <Loader></Loader>
+                ) : user ? (
+                  ""
+                ) : (
+                  <div className="flex gap-2">
+                    <Link href="/login" className="btn">
+                      Login
+                    </Link>
+                    <Link href="/signup" className="btn">
+                      Register
+                    </Link>
+                  </div>
+                )}
               </li>
             </ul>
           </div>
@@ -97,9 +175,9 @@ const Navbar = () => {
         </div>
         <div className="navbar-end">
           {isLoading ? (
-            <p>Loading...</p>
+            <Loader></Loader>
           ) : user ? (
-            <div className="dropdown dropdown-end">
+            <div className="dropdown dropdown-end hidden md:block">
               <button tabIndex={0} className="btn btn-ghost">
                 {user.name || user.email}
               </button>
@@ -108,17 +186,25 @@ const Navbar = () => {
                 className="menu menu-sm dropdown-content bg-base-100 rounded-box mt-3 w-52 p-2 shadow"
               >
                 <li>
-                  <Link href="/add-product" className="block w-full">
+                  <Link href="/add-product" className="block w-full text-sm">
                     Add Product
                   </Link>
                 </li>
                 <li>
-                  <Link href="/manage-products" className="block w-full">
+                  <Link
+                    href="/manage-products"
+                    className="block w-full text-sm"
+                  >
                     Manage Products
                   </Link>
                 </li>
                 <li>
-                  <a onClick={() => signOut({ callbackUrl: "/" })}>Logout</a>
+                  <a
+                    className="block w-full text-sm"
+                    onClick={() => signOut({ callbackUrl: "/" })}
+                  >
+                    Logout
+                  </a>
                 </li>
               </ul>
             </div>

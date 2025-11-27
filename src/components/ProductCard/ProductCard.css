@@ -1,7 +1,7 @@
 /* From Uiverse.io by SachinKumar666 */
 
 .card {
-  --card-bg: linear-gradient(135deg, #facc1525, #f59e0b25, #d9770625);
+  --card-bg: linear-gradient(135deg, #ef444425, #ec489925, #8b5cf625);
   --card-accent: #7c3aed;
   --card-text: #1e293b;
   --card-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
@@ -135,7 +135,7 @@
 
 .card__button {
   padding: 5px 12px;
-  background: linear-gradient(135deg, var(--yellow), var(--yellow-dark));
+  background: linear-gradient(135deg, var(--red), var(--violate));
   border-radius: 15px;
   display: flex;
   align-items: center;

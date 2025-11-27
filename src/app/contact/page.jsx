@@ -45,7 +45,6 @@ const Contact = () => {
       <h1 className="text-4xl font-extrabold mb-8 text-center text-blue-600">
         Contact Us
       </h1>
-
       {serverMessage && (
         <p
           className={`mb-6 font-semibold text-center ${
@@ -57,9 +56,7 @@ const Contact = () => {
           {serverMessage}
         </p>
       )}
-
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-        {/* Name */}
         <div>
           <label className="block font-medium mb-1">Name</label>
           <input
@@ -70,8 +67,6 @@ const Contact = () => {
             <p className="text-red-500 mt-1">{errors.name.message}</p>
           )}
         </div>
-
-        {/* Email */}
         <div>
           <label className="block font-medium mb-1">Email</label>
           <input
@@ -89,8 +84,6 @@ const Contact = () => {
             <p className="text-red-500 mt-1">{errors.email.message}</p>
           )}
         </div>
-
-        {/* Subject */}
         <div>
           <label className="block font-medium mb-1">Subject</label>
           <input
@@ -101,8 +94,6 @@ const Contact = () => {
             <p className="text-red-500 mt-1">{errors.subject.message}</p>
           )}
         </div>
-
-        {/* Message */}
         <div>
           <label className="block font-medium mb-1">Message</label>
           <textarea
@@ -114,7 +105,6 @@ const Contact = () => {
             <p className="text-red-500 mt-1">{errors.message.message}</p>
           )}
         </div>
-
         <button
           type="submit"
           disabled={loading}

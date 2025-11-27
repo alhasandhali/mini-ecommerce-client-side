@@ -4,6 +4,8 @@ import { useState } from "react";
 import axios from "axios";
 import { useMutation } from "@tanstack/react-query";
 import { signIn } from "next-auth/react";
+import { toast } from "react-toastify";
+import Loader from "@/components/Loader/Loader";
 
 const Signup = () => {
   const [form, setForm] = useState({
@@ -12,8 +14,6 @@ const Signup = () => {
     username: "",
     password: "",
   });
-
-  const [message, setMessage] = useState("");
 
   const signupMutation = useMutation({
     mutationFn: async (formData) => {
@@ -25,13 +25,13 @@ const Signup = () => {
     },
     onSuccess: (data) => {
       if (data.success) {
-        setMessage("Signup successful! You can now log in.");
+        toast.success("Signup successful! You can now log in.");
       } else {
-        setMessage(data.error || "Signup failed.");
+        toast.error(data.error || "Signup failed.");
       }
     },
     onError: (err) => {
-      setMessage(err.response?.data?.error || "Signup error occurred.");
+      toast.error(err.response?.data?.error || "Signup error occurred.");
     },
   });
 
@@ -45,19 +45,16 @@ const Signup = () => {
   };
 
   const handleGoogleLogin = async () => {
-    // Sign in with Google, redirect after login
     await signIn("google", { callbackUrl: "/" });
   };
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100 px-4">
-      <div className="w-full max-w-md bg-white shadow-xl rounded-2xl p-8">
-        {/* Title */}
+      <div className="w-full max-w-md bg-white shadow-xl rounded-2xl p-8 relative">
+        {signupMutation.isLoading && <Loader />}
         <h2 className="text-3xl font-bold text-gray-800 text-center mb-6">
           Create an Account
         </h2>
-
-        {/* Form */}
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label className="block text-gray-700 font-medium mb-1">
@@ -72,7 +69,6 @@ const Signup = () => {
               required
             />
           </div>
-
           <div>
             <label className="block text-gray-700 font-medium mb-1">
               Email
@@ -87,7 +83,6 @@ const Signup = () => {
               required
             />
           </div>
-
           <div>
             <label className="block text-gray-700 font-medium mb-1">
               Username
@@ -101,7 +96,6 @@ const Signup = () => {
               required
             />
           </div>
-
           <div>
             <label className="block text-gray-700 font-medium mb-1">
               Password
@@ -116,33 +110,22 @@ const Signup = () => {
               required
             />
           </div>
-
-          {/* Submit Button */}
           <button
             type="submit"
-            disabled={signupMutation.isPending}
+            disabled={signupMutation.isLoading}
             className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-lg transition"
           >
-            {signupMutation.isPending ? "Creating..." : "Create Account"}
+            {signupMutation.isLoading ? "Creating..." : "Create Account"}
           </button>
         </form>
-
-        {/* Message */}
-        {message && (
-          <p className="text-center text-sm text-green-600 mt-4">{message}</p>
-        )}
-
-        {/* Divider */}
         <div className="flex items-center gap-3 my-6">
           <div className="flex-1 h-px bg-gray-300"></div>
           <span className="text-gray-500 text-sm">OR</span>
           <div className="flex-1 h-px bg-gray-300"></div>
         </div>
-
-        {/* Google Login Button (UI Only) */}
         <button
           onClick={handleGoogleLogin}
-          className="btn w-full bg-white text-black border-[#e5e5e5]"
+          className="btn w-full bg-white text-black border-[#e5e5e5] flex items-center justify-center gap-2"
         >
           <svg
             aria-label="Google logo"
@@ -173,8 +156,6 @@ const Signup = () => {
           </svg>
           Login with Google
         </button>
-
-        {/* Footer Link */}
         <p className="text-center text-gray-600 text-sm mt-4">
           Already have an account?{" "}
           <a

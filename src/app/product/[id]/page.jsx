@@ -5,6 +5,9 @@ import Image from "next/image";
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import { useParams, useRouter } from "next/navigation";
+import Loader from "@/components/Loader/Loader";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const fetchProduct = async (id) => {
   const { data } = await axios.get(
@@ -14,30 +17,35 @@ const fetchProduct = async (id) => {
 };
 
 const ProductDetails = () => {
-  const params = useParams(); // <-- get params safely
+  const params = useParams();
   const { id } = params;
-
   const router = useRouter();
 
-  // Fetch product with React Query
   const {
     data: product,
     isLoading,
     isError,
+    error,
   } = useQuery({
     queryKey: ["product", id],
     queryFn: () => fetchProduct(id),
   });
 
+  React.useEffect(() => {
+    if (isError) {
+      toast.error(error?.message || "Failed to fetch product");
+    }
+  }, [isError, error]);
+
   if (isLoading) {
     return (
       <div className="w-11/12 max-w-4xl mx-auto mt-20 text-center">
-        <p className="text-xl text-gray-500">Loading product...</p>
+        <Loader />
       </div>
     );
   }
 
-  if (isError || !product) {
+  if (!product) {
     return (
       <div className="w-11/12 max-w-4xl mx-auto mt-20 text-center">
         <p className="text-xl text-gray-500">Product not found</p>
@@ -48,7 +56,6 @@ const ProductDetails = () => {
   return (
     <div className="bg-[linear-gradient(135deg,#ef444440,#ec489940,#facc1520)] max-w-6xl mx-auto my-12 p-6 md:p-12 bg-white rounded-3xl shadow-lg">
       <div className="grid md:grid-cols-2 gap-10 items-start">
-        {/* Left: Image */}
         <div className="flex justify-center md:justify-start">
           <div className="relative w-full max-w-md h-80 md:h-[500px] rounded-2xl overflow-hidden shadow-lg">
             <Image
@@ -60,13 +67,10 @@ const ProductDetails = () => {
             />
           </div>
         </div>
-
-        {/* Right: Product Info */}
         <div className="flex flex-col justify-between">
           <div>
             <h1 className="text-4xl font-extrabold mb-3">{product.title}</h1>
             <p className="text-gray-500 mb-4">{product.short_description}</p>
-
             <div className="flex items-center gap-4 mb-4">
               <span className="text-3xl font-bold text-[#8b5cf6]">
                 ${product.price}
@@ -77,9 +81,7 @@ const ProductDetails = () => {
                 </span>
               )}
             </div>
-
             <p className="text-gray-700 mb-6">{product.full_description}</p>
-
             <div className="grid grid-cols-2 gap-4 mb-6">
               <div>
                 <p className="font-semibold text-gray-600">Brand</p>
@@ -98,7 +100,6 @@ const ProductDetails = () => {
                 <p>{product.released_date}</p>
               </div>
             </div>
-
             <div className="flex flex-wrap gap-2 mb-6">
               {product.tags?.map((tag) => (
                 <span
@@ -110,8 +111,6 @@ const ProductDetails = () => {
               ))}
             </div>
           </div>
-
-          {/* Action Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 mt-4">
             <button
               onClick={() => router.back()}

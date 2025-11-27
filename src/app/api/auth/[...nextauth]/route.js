@@ -40,10 +40,8 @@ const handler = NextAuth({
   pages: { signIn: "/login" },
 
   callbacks: {
-    // --- NEW: Google signup handler ---
     async signIn({ user, account }) {
       if (account.provider === "google") {
-        // Save Google user to your backend
         await axios.post(
           `https://techtrove-server-side.vercel.app/google-signup`,
           {
@@ -55,8 +53,6 @@ const handler = NextAuth({
       }
       return true;
     },
-
-    // JWT callback
     async jwt({ token, user }) {
       if (user) {
         token.id = user.id || user.sub;
@@ -66,7 +62,6 @@ const handler = NextAuth({
       return token;
     },
 
-    // Session callback
     async session({ session, token }) {
       session.user.id = token.id;
       session.user.name = token.name;

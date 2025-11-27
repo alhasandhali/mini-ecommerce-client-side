@@ -4,11 +4,15 @@ import React from "react";
 import ProductCard from "../ProductCard/ProductCard";
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
+import Loader from "../Loader/Loader";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const FeaturedProducts = () => {
   const {
     data: products = [],
     isLoading,
+    isError,
     error,
   } = useQuery({
     queryKey: ["products"],
@@ -18,13 +22,14 @@ const FeaturedProducts = () => {
       );
       return res.data;
     },
+    onError: (err) => {
+      toast.error("Failed to fetch products!");
+    },
   });
 
-  if (isLoading) return <p className="text-center py-10">Loading...</p>;
-  if (error)
-    return (
-      <p className="text-center py-10 text-red-500">Error fetching products</p>
-    );
+  if (isLoading) return <Loader />;
+
+  if (isError) return null;
 
   const topProducts = products.slice(0, 6);
 
@@ -38,7 +43,7 @@ const FeaturedProducts = () => {
 
           <div className="grid gap-4 grid-cols-1 md:grid-cols-3">
             {topProducts.map((product, i) => (
-              <ProductCard key={i} product={product}></ProductCard>
+              <ProductCard key={i} product={product} />
             ))}
           </div>
         </div>

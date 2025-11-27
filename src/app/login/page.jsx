@@ -3,12 +3,14 @@
 import { useState } from "react";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import Loader from "@/components/Loader/Loader";
 
 const Login = () => {
   const router = useRouter();
-
   const [form, setForm] = useState({ email: "", password: "" });
-  const [message, setMessage] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -16,6 +18,7 @@ const Login = () => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    setLoading(true);
 
     const res = await signIn("credentials", {
       redirect: false,
@@ -23,27 +26,28 @@ const Login = () => {
       password: form.password,
     });
 
+    setLoading(false);
+
     if (res.error) {
-      setMessage("Invalid email or password.");
+      toast.error("Invalid email or password.");
     } else {
+      toast.success("Login successful!");
       router.push("/");
     }
   };
 
   const handleGoogleLogin = async () => {
-    // Sign in with Google, redirect after login
+    setLoading(true);
     await signIn("google", { callbackUrl: "/" });
   };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-linear-to-br from-indigo-500 via-purple-500 to-pink-500 p-6">
+      {loading && <Loader />}
       <div className="w-full max-w-md bg-white/20 backdrop-blur-xl shadow-2xl rounded-2xl p-8 border border-white/30">
         <h2 className="text-3xl font-bold text-white text-center mb-6">
           Welcome Back
         </h2>
-
-        {message && <p className="text-red-300 text-center mb-4">{message}</p>}
-
         <form onSubmit={handleLogin} className="space-y-5">
           <div>
             <label className="text-white font-medium">Email</label>
@@ -57,7 +61,6 @@ const Login = () => {
               required
             />
           </div>
-
           <div>
             <label className="text-white font-medium">Password</label>
             <input
@@ -70,7 +73,6 @@ const Login = () => {
               required
             />
           </div>
-
           <button
             type="submit"
             className="w-full py-3 rounded-xl bg-white text-indigo-600 font-semibold text-lg hover:bg-white/90 transition"
@@ -78,18 +80,15 @@ const Login = () => {
             Log In
           </button>
         </form>
-
         <div className="mt-6 text-center text-white/80">OR</div>
-
-        {/* Google Login Button (UI Only) */}
         <button
           onClick={handleGoogleLogin}
-          className="btn w-full bg-white text-black border-[#e5e5e5]"
+          className="btn w-full bg-white text-black mt-4 flex items-center justify-center gap-2"
         >
           <svg
             aria-label="Google logo"
-            width="16"
-            height="16"
+            width="20"
+            height="20"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 512 512"
           >
@@ -115,7 +114,6 @@ const Login = () => {
           </svg>
           Login with Google
         </button>
-
         <p className="text-center text-white/70 mt-6">
           Don’t have an account?{" "}
           <a

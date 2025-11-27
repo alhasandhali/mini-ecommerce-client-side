@@ -9,12 +9,14 @@ import "swiper/css";
 import "swiper/css/pagination";
 import Image from "next/image";
 import Link from "next/link";
+import Loader from "@/components/Loader/Loader";
+import { toast } from "react-toastify";
 
 const Banner = () => {
   const {
     data: products = [],
     isLoading,
-    error,
+    isError,
   } = useQuery({
     queryKey: ["products"],
     queryFn: async () => {
@@ -25,11 +27,11 @@ const Banner = () => {
     },
   });
 
-  if (isLoading) return <p className="text-center py-10">Loading...</p>;
-  if (error)
-    return (
-      <p className="text-center py-10 text-red-500">Error fetching products</p>
-    );
+  if (isError) {
+    toast.error("Failed to fetch products!");
+  }
+
+  if (isLoading) return <Loader />;
 
   const randomProducts = products.slice(0, 3);
 
@@ -92,12 +94,7 @@ const Banner = () => {
                   laptops!
                 </p>
               </div>
-
-              <button
-                className="mt-5 bg-white text-amber-600 font-semibold w-max px-5 py-3 
-                         rounded-xl shadow-lg hover:bg-amber-100 hover:shadow-2xl 
-                         active:scale-95 transition-all duration-300"
-              >
+              <button className="mt-5 bg-white text-amber-600 font-semibold w-max px-5 py-3 rounded-xl shadow-lg hover:bg-amber-100 hover:shadow-2xl active:scale-95 transition-all duration-300">
                 Shop Now
               </button>
             </div>
@@ -115,12 +112,7 @@ const Banner = () => {
                   Buy 1 get 1 FREE on accessories!
                 </p>
               </div>
-
-              <button
-                className="mt-5 bg-white text-pink-600 font-semibold w-max px-5 py-3 
-                         rounded-xl shadow-lg hover:bg-pink-100 hover:shadow-2xl 
-                         active:scale-95 transition-all duration-300"
-              >
+              <button className="mt-5 bg-white text-pink-600 font-semibold w-max px-5 py-3 rounded-xl shadow-lg hover:bg-pink-100 hover:shadow-2xl active:scale-95 transition-all duration-300">
                 Shop Now
               </button>
             </div>
