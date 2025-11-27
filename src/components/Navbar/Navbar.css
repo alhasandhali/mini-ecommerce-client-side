@@ -1,0 +1,11 @@
+.active {
+  color: var(--yellow-dark);
+  font-weight: bold;
+  border-bottom: 1px solid;
+}
+
+li a:hover {
+  color: var(--violate);
+  transition: all 0.5s ease;
+  background: transparent;
+}
