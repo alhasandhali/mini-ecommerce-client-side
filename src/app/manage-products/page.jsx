@@ -181,7 +181,8 @@ const ManageProducts = () => {
                 </td>
 
                 <td className="px-6 py-4 font-bold text-amber-600">
-                  ${product.price}
+                  {product.price}
+                  <sup>$</sup>
                 </td>
 
                 <td className="px-6 py-4">{product.stock}</td>

@@ -71,7 +71,7 @@ const Footer = () => {
             <FaGithub className="cursor-pointer hover:text-white" />
           </div>
           <p className="text-sm opacity-70">
-            © {new Date().getFullYear()} Your Company. All rights reserved.
+            © {new Date().getFullYear()} TechTrove. All rights reserved.
           </p>
         </div>
       </div>
