@@ -6,7 +6,7 @@ import { useMutation } from "@tanstack/react-query";
 import { signIn } from "next-auth/react";
 import { toast } from "react-toastify";
 import Loader from "@/components/Loader/Loader";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 
 const Signup = () => {
   const router = useRouter();
