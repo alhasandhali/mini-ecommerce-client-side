@@ -6,8 +6,11 @@ import { useMutation } from "@tanstack/react-query";
 import { signIn } from "next-auth/react";
 import { toast } from "react-toastify";
 import Loader from "@/components/Loader/Loader";
+import { useRouter } from "next/router";
 
 const Signup = () => {
+  const router = useRouter();
+
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -26,6 +29,10 @@ const Signup = () => {
     onSuccess: (data) => {
       if (data.success) {
         toast.success("Signup successful! You can now log in.");
+        if (variables.reset) {
+          variables.reset();
+        }
+        router.push("/login");
       } else {
         toast.error(data.error || "Signup failed.");
       }
