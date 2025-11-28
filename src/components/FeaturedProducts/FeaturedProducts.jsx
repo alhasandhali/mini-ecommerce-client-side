@@ -37,7 +37,7 @@ const FeaturedProducts = () => {
     <div>
       <section className="py-16 bg-base-200">
         <div className="max-w-6xl mx-auto px-4">
-          <h2 className="text-3xl md:text-5xl font-bold text-center mb-14">
+          <h2 className="text-3xl md:text-5xl poppins font-bold text-center mb-14 text-primary-gradient">
             Featured Products
           </h2>
 

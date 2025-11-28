@@ -1,7 +1,7 @@
 import { Inter, Poppins } from "next/font/google";
 import "./globals.css";
 import ClientProviders from "./ClientProviders";
-import { SessionProvider } from "next-auth/react";
+import { ToastContainer } from "react-toastify";
 
 export const inter = Inter({
   variable: "--font-inter",
@@ -24,6 +24,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" data-theme="light">
       <body className={`${inter.variable} ${poppins.variable} antialiased`}>
+        <ToastContainer position="top-right" autoClose={3000} />
         <ClientProviders>{children}</ClientProviders>
       </body>
     </html>

@@ -22,7 +22,7 @@ const PromoBanner = () => {
           Grab the latest gadgets with exclusive{" "}
           <span className="font-bold">TechTrove</span> deals.
         </p>
-        <button className="mt-8 px-8 py-4 bg-white text-black font-semibold rounded-xl shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300">
+        <button className="mt-8 px-8 py-4 bg-primary-gradient text-white font-semibold rounded-xl shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300 cursor-pointer">
           Shop Deals
         </button>
       </div>

@@ -42,15 +42,15 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-linear-to-br from-indigo-500 via-purple-500 to-pink-500 p-6">
+    <div className="min-h-screen flex items-center justify-center bg-primary-gradient p-6 inter">
       {loading && <Loader />}
-      <div className="w-full max-w-md bg-white/20 backdrop-blur-xl shadow-2xl rounded-2xl p-8 border border-white/30">
-        <h2 className="text-3xl font-bold text-white text-center mb-6">
+      <div className="w-full max-w-md bg-white/20 backdrop-blur-xl shadow-2xl rounded-2xl p-8 border border-white/70">
+        <h2 className="poppins text-3xl font-bold text-white text-center mb-6">
           Welcome Back
         </h2>
         <form onSubmit={handleLogin} className="space-y-5">
           <div>
-            <label className="text-white font-medium">Email</label>
+            <label className="text-white">Email</label>
             <input
               name="email"
               type="email"
@@ -62,7 +62,7 @@ const Login = () => {
             />
           </div>
           <div>
-            <label className="text-white font-medium">Password</label>
+            <label className="text-white">Password</label>
             <input
               name="password"
               type="password"
@@ -75,12 +75,16 @@ const Login = () => {
           </div>
           <button
             type="submit"
-            className="w-full py-3 rounded-xl bg-white text-indigo-600 font-semibold text-lg hover:bg-white/90 transition"
+            className="poppins w-full py-3 rounded-xl bg-white text-black font-semibold text-lg hover:bg-white/90 transition-all duration-300 cursor-pointer"
           >
             Log In
           </button>
         </form>
-        <div className="mt-6 text-center text-white/80">OR</div>
+        <div className="flex items-center gap-3 my-6">
+          <div className="flex-1 h-px bg-white"></div>
+          <span className="text-white text-sm">OR</span>
+          <div className="flex-1 h-px bg-white"></div>
+        </div>
         <button
           onClick={handleGoogleLogin}
           className="btn w-full bg-white text-black mt-4 flex items-center justify-center gap-2"
@@ -114,7 +118,7 @@ const Login = () => {
           </svg>
           Login with Google
         </button>
-        <p className="text-center text-white/70 mt-6">
+        <p className="text-center text-white font-light mt-6">
           Don’t have an account?{" "}
           <a
             href="/signup"

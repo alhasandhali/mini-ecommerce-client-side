@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 
 const Features = () => {
@@ -25,10 +26,11 @@ const Features = () => {
   ];
 
   return (
-    <section className="py-20 bg-linear-to-b from-base-100 to-base-200">
+    <section className="py-10 bg-linear-to-b from-base-100 to-base-200">
       <div className="max-w-7xl mx-auto px-6">
-        <h2 className="text-3xl md:text-5xl font-bold text-center mb-14">
-          Why Choose <span className="text-primary">TechTrove?</span>
+        <h2 className="text-3xl md:text-5xl poppins font-bold text-center mb-10">
+          <span className="text-primary-gradient">Why Choose</span>{" "}
+          <span>TechTrove?</span>
         </h2>
 
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
@@ -47,7 +49,7 @@ const Features = () => {
                 animate-fadeIn
               "
             >
-              <div className="flex items-center justify-center w-16 h-16 mx-auto mb-6 rounded-full bg-[linear-gradient(135deg,#ef4444,#ec4899,#8b5cf6)] text-white text-4xl shadow-lg border-2 border-amber-200">
+              <div className="flex items-center justify-center w-16 h-16 mx-auto mb-6 rounded-full bg-softGray text-white text-4xl shadow-lg border-2 border-primary">
                 {item.icon}
               </div>
 

@@ -7,7 +7,8 @@ import Image from "next/image";
 import { useForm } from "react-hook-form";
 import Loader from "@/components/Loader/Loader";
 import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import Link from "next/link";
+import Swal from "sweetalert2";
 
 const ManageProducts = () => {
   const queryClient = useQueryClient();
@@ -39,22 +40,20 @@ const ManageProducts = () => {
 
   useEffect(() => {
     if (editingProduct) {
-      [
+      const editableFields = [
         "sku",
         "title",
         "short_description",
         "full_description",
         "price",
-        "released_date",
         "priority",
         "image_url",
         "brand",
         "stock",
-        "rating",
-        "category",
-        "relevant",
         "tags",
-      ].forEach((field) => {
+      ];
+
+      editableFields.forEach((field) => {
         if (field === "tags") {
           setValue("tags", editingProduct.tags?.join(", ") || "");
         } else {
@@ -68,22 +67,16 @@ const ManageProducts = () => {
 
   const updateProductMutation = useMutation({
     mutationFn: async (formData) => {
-      const { _id, ...originalData } = editingProduct;
-
       const sanitized = {
         sku: formData.sku,
         title: formData.title,
         short_description: formData.short_description,
         full_description: formData.full_description,
         price: parseFloat(formData.price),
-        released_date: formData.released_date,
         priority: parseInt(formData.priority) || 0,
         image_url: formData.image_url,
         brand: formData.brand,
         stock: parseInt(formData.stock),
-        rating: parseFloat(formData.rating),
-        category: formData.category,
-        relevant: formData.relevant === "true",
         tags: formData.tags
           ? formData.tags.split(",").map((t) => t.trim())
           : [],
@@ -96,6 +89,7 @@ const ManageProducts = () => {
 
       return response.data;
     },
+
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["products"] });
       reset();
@@ -103,12 +97,11 @@ const ManageProducts = () => {
       document.getElementById("edit_modal").close();
       toast.success("Product updated successfully!");
     },
+
     onError: (error) => {
-      console.error(error);
       toast.error(error?.response?.data?.message || "Failed to update product");
     },
   });
-
   const deleteMutation = useMutation({
     mutationFn: async (id) => {
       const res = await axios.delete(
@@ -121,87 +114,112 @@ const ManageProducts = () => {
       toast.success("Product deleted successfully!");
     },
     onError: (err) => {
-      setDeleteError(
-        err?.response?.data?.message || "Failed to delete product"
-      );
-      toast.error(err?.response?.data?.message || "Failed to delete product");
+      setDeleteError(err?.response?.data?.message || "Failed to delete");
+      toast.error(err?.response?.data?.message || "Failed to delete");
     },
   });
 
-  const onSubmit = (data) => {
-    updateProductMutation.mutate(data);
-  };
+  const onSubmit = (data) => updateProductMutation.mutate(data);
 
-  if (isLoading) return <Loader />;
+  if (isLoading)
+    return (
+      <div className="flex justify-center py-10">
+        <Loader />
+      </div>
+    );
   if (isError)
     return <p className="text-center py-10 text-red-500">{error.message}</p>;
 
   return (
-    <div className="w-11/12 max-w-7xl mx-auto mt-10">
-      <h1 className="text-3xl font-bold mb-6 text-center">Manage Products</h1>
-      {deleteError && <p className="text-red-500 mb-4">{deleteError}</p>}
+    <div className="w-11/12 max-w-7xl mx-auto my-10 inter">
+      <h1 className="text-3xl md:text-4xl font-bold mb-1 text-primary-gradient poppins">
+        My Products
+      </h1>
+      <div className="w-full h-0.5 bg-primary-gradient rounded-2xl mb-6"></div>
 
-      <div className="overflow-x-auto shadow-md rounded-lg">
-        <table className="min-w-full divide-y divide-gray-200 bg-white">
+      {deleteError && (
+        <p className="text-red-500 mb-4 text-center">{deleteError}</p>
+      )}
+      <div className="overflow-x-auto shadow-lg rounded-lg bg-base-100">
+        <table className="min-w-full divide-y divide-gray-200">
           <thead className="bg-gray-50">
             <tr>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Image
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Title
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Price
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Stock
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Category
-              </th>
-              <th className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Actions
-              </th>
+              {["Image", "Title", "Price", "Stock", "Category", "Actions"].map(
+                (head) => (
+                  <th
+                    key={head}
+                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                  >
+                    {head}
+                  </th>
+                )
+              )}
             </tr>
           </thead>
+
           <tbody className="divide-y divide-gray-200">
             {products.map((product) => (
               <tr key={product._id} className="hover:bg-gray-50 transition">
                 <td className="px-6 py-4">
-                  <div className="w-20 h-20 relative">
+                  <div className="w-20 h-20 relative rounded-lg overflow-hidden">
                     <Image
-                      src={product.image_url || "/placeholder.png"}
+                      src={product.image_url}
                       alt={product.title}
                       fill
                       style={{ objectFit: "cover" }}
-                      className="rounded-lg"
                     />
                   </div>
                 </td>
-                <td className="px-6 py-4 font-medium text-gray-900">
-                  {product.title}
+
+                <td className="poppins px-6 py-4 font-medium text-gray-900">
+                  <Link
+                    href={`/product/${product._id}`}
+                    className="hover:text-primary hover:underline"
+                  >
+                    {product.title}
+                  </Link>
                 </td>
-                <td className="px-6 py-4 text-amber-600 font-bold">
+
+                <td className="px-6 py-4 font-bold text-amber-600">
                   ${product.price}
                 </td>
+
                 <td className="px-6 py-4">{product.stock}</td>
+
                 <td className="px-6 py-4">{product.category}</td>
-                <td className="px-6 py-4 text-center space-x-2">
+
+                <td className="px-6 py-4 flex items-center gap-2">
                   <button
-                    className="px-4 py-1 bg-blue-600 text-white rounded hover:bg-blue-700 transition"
+                    className="btn btn-sm btn-outline btn-primary"
                     onClick={() => setEditingProduct(product)}
                   >
                     Edit
                   </button>
+
                   <button
-                    className="px-4 py-1 bg-red-600 text-white rounded hover:bg-red-700 transition"
+                    className="btn btn-sm btn-outline btn-error hover:text-white"
                     onClick={() => {
-                      if (
-                        confirm("Are you sure you want to delete this product?")
-                      ) {
-                        deleteMutation.mutate(product._id);
-                      }
+                      Swal.fire({
+                        title: "Are you sure?",
+                        text: "This product will be deleted permanently!",
+                        icon: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "#3085d6",
+                        cancelButtonColor: "#d33",
+                        confirmButtonText: "Yes, delete it!",
+                      }).then((result) => {
+                        if (result.isConfirmed) {
+                          deleteMutation.mutate(product._id, {
+                            onSuccess: () => {
+                              Swal.fire({
+                                title: "Deleted!",
+                                text: "Product has been deleted successfully.",
+                                icon: "success",
+                              });
+                            },
+                          });
+                        }
+                      });
                     }}
                   >
                     Delete
@@ -212,18 +230,18 @@ const ManageProducts = () => {
           </tbody>
         </table>
       </div>
-
       <dialog
         id="edit_modal"
         className="modal modal-bottom sm:modal-middle"
         open={!!editingProduct}
       >
-        <div className="modal-box overflow-y-auto max-h-[90vh]">
-          <h1 className="text-2xl font-bold text-center mb-4 text-blue-600">
-            Edit Product
+        <div className="modal-box max-h-[90vh] max-w-3xl overflow-y-auto bg-primary-gradient">
+          <h1 className="poppins text-3xl font-bold text-white text-center mb-6">
+            Update Product
           </h1>
+
           <button
-            className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
+            className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2 text-white hover:text-black"
             onClick={() => setEditingProduct(null)}
           >
             ✕
@@ -231,16 +249,59 @@ const ManageProducts = () => {
 
           <form
             onSubmit={handleSubmit(onSubmit)}
-            className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4"
+            className="grid grid-cols-1 md:grid-cols-2 gap-6"
           >
-            <button
-              type="submit"
-              className="md:col-span-2 bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition mt-2"
-            >
-              {updateProductMutation.isLoading
-                ? "Updating..."
-                : "Update Product"}
-            </button>
+            {[
+              { name: "sku", label: "SKU", required: true },
+              { name: "title", label: "Title", required: true },
+              { name: "short_description", label: "Short Description" },
+              { name: "price", label: "Price ($)", type: "number" },
+              { name: "priority", label: "Priority", type: "number" },
+              { name: "image_url", label: "Image URL" },
+              { name: "brand", label: "Brand" },
+              { name: "stock", label: "Stock", type: "number" },
+              { name: "tags", label: "Tags (comma separated)" },
+            ].map((field, index) => (
+              <div key={index}>
+                <label className="text-white mb-1">{field.label}</label>
+                <input
+                  {...register(
+                    field.name,
+                    field.required
+                      ? { required: `${field.label} is required` }
+                      : {}
+                  )}
+                  type={field.type || "text"}
+                  className="w-full px-4 py-3 rounded-xl bg-white/30 text-white placeholder-white/70 outline-none focus:ring-2 focus:ring-white"
+                  placeholder={`Enter ${field.label}...`}
+                />
+                {errors[field.name] && (
+                  <p className="text-red-500 text-sm">
+                    {errors[field.name]?.message}
+                  </p>
+                )}
+              </div>
+            ))}
+            <div className="md:col-span-2">
+              <label className="text-white mb-1">Full Description</label>
+              <textarea
+                {...register("full_description")}
+                rows="4"
+                className="w-full px-4 py-3 rounded-xl bg-white/30 text-white placeholder-white/70 outline-none focus:ring-2 focus:ring-white"
+                placeholder="Enter full description..."
+              ></textarea>
+            </div>
+            <div className="md:col-span-2 flex justify-center">
+              <button
+                type="submit"
+                disabled={updateProductMutation.isLoading}
+                className="poppins w-full py-3 rounded-xl bg-white text-black font-semibold text-lg hover:bg-white/90 transition-all duration-300 cursor-pointer"
+              >
+                {updateProductMutation.isLoading
+                  ? "Updating..."
+                  : "Update Product"}
+              </button>
+            </div>
           </form>
         </div>
       </dialog>

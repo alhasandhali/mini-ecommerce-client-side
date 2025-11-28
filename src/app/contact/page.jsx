@@ -40,33 +40,40 @@ const Contact = () => {
       );
   };
 
+  const inputClass =
+    "input input-bordered w-full border border-[#39424e50] rounded-lg outline-none focus:ring focus:ring-primary focus:border-none";
+
   return (
-    <div className="w-11/12 max-w-3xl mx-auto mt-12 p-8 bg-white/80 backdrop-blur-md rounded-3xl shadow-xl">
-      <h1 className="text-4xl font-extrabold mb-8 text-center text-blue-600">
+    <div className="w-11/12 max-w-3xl mx-auto mt-12 p-8 rounded-3xl shadow-lg bg-base-100 dark:bg-base-200">
+      <h1 className="poppins text-4xl font-extrabold mb-8 text-center text-primary-gradient">
         Contact Us
       </h1>
+
       {serverMessage && (
         <p
           className={`mb-6 font-semibold text-center ${
             serverMessage.includes("successfully")
-              ? "text-green-600"
-              : "text-red-600"
+              ? "text-green-500"
+              : "text-red-500"
           }`}
         >
           {serverMessage}
         </p>
       )}
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 inter">
         <div>
           <label className="block font-medium mb-1">Name</label>
           <input
             {...register("name", { required: "Name is required" })}
-            className="w-full border border-gray-300 px-4 py-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400"
+            className={inputClass}
+            placeholder="Enter you name..."
           />
           {errors.name && (
-            <p className="text-red-500 mt-1">{errors.name.message}</p>
+            <p className="text-error mt-1">{errors.name.message}</p>
           )}
         </div>
+
         <div>
           <label className="block font-medium mb-1">Email</label>
           <input
@@ -78,41 +85,45 @@ const Contact = () => {
                 message: "Invalid email address",
               },
             })}
-            className="w-full border border-gray-300 px-4 py-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400"
+            className={inputClass}
+            placeholder="Enter you email..."
           />
           {errors.email && (
-            <p className="text-red-500 mt-1">{errors.email.message}</p>
+            <p className="text-error mt-1">{errors.email.message}</p>
           )}
         </div>
+
         <div>
           <label className="block font-medium mb-1">Subject</label>
           <input
             {...register("subject", { required: "Subject is required" })}
-            className="w-full border border-gray-300 px-4 py-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400"
+            className={inputClass}
+            placeholder="Enter email subject..."
           />
           {errors.subject && (
-            <p className="text-red-500 mt-1">{errors.subject.message}</p>
+            <p className="text-error mt-1">{errors.subject.message}</p>
           )}
         </div>
+
         <div>
           <label className="block font-medium mb-1">Message</label>
           <textarea
             {...register("message", { required: "Message is required" })}
             rows={5}
-            className="w-full border border-gray-300 px-4 py-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400 resize-none"
+            className="textarea textarea-bordered w-full resize-none border border-[#39424e50] rounded-lg outline-none focus:ring focus:ring-primary focus:border-none"
+            placeholder="Write your message..."
           />
           {errors.message && (
-            <p className="text-red-500 mt-1">{errors.message.message}</p>
+            <p className="text-error mt-1">{errors.message.message}</p>
           )}
         </div>
+
         <button
           type="submit"
           disabled={loading}
-          className={`w-full text-white font-semibold py-3 rounded-xl transition-transform duration-200 ${
-            loading
-              ? "bg-blue-400 cursor-not-allowed"
-              : "bg-blue-600 hover:bg-blue-700 active:scale-95"
-          }`}
+          className={`btn w-full ${
+            loading ? "btn-disabled" : "bg-primary-gradient"
+          } bg-primary-gradient poppins text-white font-semibold rounded-md hover:opacity-85 transition-all duration-300`}
         >
           {loading ? "Sending..." : "Send Message"}
         </button>

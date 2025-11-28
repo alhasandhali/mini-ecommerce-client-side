@@ -54,67 +54,74 @@ const ProductDetails = () => {
   }
 
   return (
-    <div className="bg-[linear-gradient(135deg,#ef444440,#ec489940,#facc1520)] max-w-6xl mx-auto my-12 p-6 md:p-12 bg-white rounded-3xl shadow-lg">
+    <div className="max-w-6xl mx-auto my-12 p-6 md:p-12 bg-base-100 rounded-3xl shadow-lg inter">
       <div className="grid md:grid-cols-2 gap-10 items-start">
         <div className="flex justify-center md:justify-start">
           <div className="relative w-full max-w-md h-80 md:h-[500px] rounded-2xl overflow-hidden shadow-lg">
             <Image
-              src={product.image_url || "/placeholder.png"}
+              src={product.image_url}
               alt={product.title}
               fill
               style={{ objectFit: "cover" }}
-              className="rounded-2xl"
+              className="rounded-2xl border-2 border-[#b9f3ff]"
             />
           </div>
         </div>
         <div className="flex flex-col justify-between">
           <div>
-            <h1 className="text-4xl font-extrabold mb-3">{product.title}</h1>
-            <p className="text-gray-500 mb-4">{product.short_description}</p>
+            <h1 className="text-4xl font-extrabold mb-3 text-primary-gradient poppins">
+              {product.title}
+            </h1>
+            <p className="text-gray-500 mb-4 inter">
+              {product.short_description}
+            </p>
             <div className="flex items-center gap-4 mb-4">
-              <span className="text-3xl font-bold text-[#8b5cf6]">
-                ${product.price}
+              <span className="text-3xl font-bold text-primary-gradient poppins">
+                {product.price}
+                <sup className="text-primary-gradient">$</sup>
               </span>
               {product.rating && (
-                <span className="text-yellow-500 font-semibold">
+                <span className="text-[#f5c16c] font-semibold poppins">
                   ★ {product.rating}
                 </span>
               )}
             </div>
-            <p className="text-gray-700 mb-6">{product.full_description}</p>
+            <p className="text-gray-700 mb-6 inter text-justify">
+              {product.full_description}
+            </p>
             <div className="grid grid-cols-2 gap-4 mb-6">
               <div>
-                <p className="font-semibold text-gray-600">Brand</p>
-                <p>{product.brand}</p>
+                <p className="font-semibold text-gray-600 poppins">Brand</p>
+                <p className="inter">{product.brand}</p>
               </div>
               <div>
-                <p className="font-semibold text-gray-600">Stock</p>
-                <p>{product.stock} available</p>
+                <p className="font-semibold text-gray-600 poppins">Stock</p>
+                <p className="inter">{product.stock} available</p>
               </div>
               <div>
-                <p className="font-semibold text-gray-600">Category</p>
-                <p>{product.category}</p>
+                <p className="font-semibold text-gray-600 poppins">Category</p>
+                <p className="inter">{product.category}</p>
               </div>
               <div>
-                <p className="font-semibold text-gray-600">Released</p>
-                <p>{product.released_date}</p>
+                <p className="font-semibold text-gray-600 poppins">Released</p>
+                <p className="inter">{product.released_date}</p>
               </div>
             </div>
             <div className="flex flex-wrap gap-2 mb-6">
               {product.tags?.map((tag) => (
                 <span
                   key={tag}
-                  className="px-3 py-1 bg-blue-100 text-[#8b5cf6] rounded-full text-sm"
+                  className="px-3 py-1 bg-primary-gradient text-white rounded-full text-sm font-medium"
                 >
                   {tag}
                 </span>
               ))}
             </div>
           </div>
-          <div className="flex flex-col sm:flex-row gap-4 mt-4">
+          <div className="flex flex-col sm:flex-row gap-4 mt-4 w-full">
             <button
               onClick={() => router.back()}
-              className="w-full sm:w-auto bg-[#8b5cf6] text-white px-6 py-3 rounded-xl font-semibold hover:bg-blue-700 transition cursor-pointer"
+              className="w-full bg-primary-gradient poppins text-white py-3 rounded-xl font-semibold hover:opacity-85 transition-all cursor-pointer"
             >
               Back
             </button>

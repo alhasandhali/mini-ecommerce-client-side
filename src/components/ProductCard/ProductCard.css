@@ -1,9 +1,8 @@
 /* From Uiverse.io by SachinKumar666 */
 
 .card {
-  --card-bg: linear-gradient(135deg, #ef444425, #ec489925, #8b5cf625);
+  --card-bg: linear-gradient(135deg, #1a73e835, #00c4ff35, #b9f3ff35);
   --card-accent: #7c3aed;
-  --card-text: #1e293b;
   --card-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
 
   width: 100%;
@@ -25,7 +24,7 @@
   background: linear-gradient(
     120deg,
     rgba(255, 255, 255, 0) 40%,
-    rgba(255, 255, 255, 0.503) 50%,
+    rgba(255, 255, 255, 0.3) 50%,
     rgba(255, 255, 255, 0) 60%
   );
   opacity: 0;
@@ -37,8 +36,8 @@
   inset: -10px;
   background: radial-gradient(
     circle at 50% 0%,
-    rgba(237, 58, 183, 0.3) 0%,
-    rgba(237, 234, 58, 0) 70%
+    rgb(26, 115, 232, 0.3) 0%,
+    rgb(185, 243, 255, 0.3) 70%
   );
   opacity: 0;
   transition: opacity 0.5s ease;
@@ -58,7 +57,7 @@
   position: absolute;
   top: 12px;
   right: 12px;
-  background: var(--violate);
+  background: var(--primary);
   color: white;
   padding: 0.25em 0.5em;
   border-radius: 999px;
@@ -104,7 +103,7 @@
 }
 
 .card__title {
-  color: var(--card-text);
+  color: var(--primary-neutral);
   font-size: 1.1em;
   margin: 0;
   font-weight: 700;
@@ -112,7 +111,7 @@
 }
 
 .card__description {
-  color: var(--card-text);
+  color: var(--primary-neutral);
   font-size: 0.75em;
   margin: 0;
   opacity: 0.7;
@@ -126,8 +125,8 @@
   margin-top: auto;
 }
 
-.card__quantity {
-  color: var(--card-text);
+.card__price {
+  color: var(--primary-neutral);
   font-weight: 400;
   font-size: 16px;
   transition: all 0.3s ease;
@@ -135,7 +134,7 @@
 
 .card__button {
   padding: 5px 12px;
-  background: linear-gradient(135deg, var(--red), var(--violate));
+  background: linear-gradient(135deg, var(--primary), var(--accent));
   border-radius: 15px;
   display: flex;
   align-items: center;
@@ -152,7 +151,7 @@
   box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
     0 10px 10px -5px rgba(0, 0, 0, 0.04);
   border-color: rgba(237, 225, 58, 0.2);
-  background: linear-gradient(135deg, #ef444420, #ec489920, #8b5cf620);
+  background: linear-gradient(135deg, #1a73e825, #00c4ff25, #b9f3ff25);
 }
 
 .card:hover .card__shine {
@@ -176,7 +175,7 @@
 }
 
 .card:hover .card__title {
-  background: linear-gradient(135deg, var(--red), var(--pink), var(--violate));
+  background: linear-gradient(135deg, var(--primary), var(--accent));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -188,8 +187,9 @@
   transform: translateX(2px);
 }
 
-.card:hover .card__quantity {
-  background: linear-gradient(135deg, var(--red), var(--pink), var(--violate));
+.card:hover .card__price,
+.card:hover sup {
+  background: linear-gradient(135deg, var(--primary), var(--accent));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -199,8 +199,8 @@
 
 .card:hover .card__button {
   transform: scale(1);
-  box-shadow: 0 0 0 4px #8b5cf635;
-  background: linear-gradient(135deg, var(--red), var(--pink), var(--violate));
+  box-shadow: 0 0 0 4px #1a73e845;
+  background: linear-gradient(135deg, var(--primary), var(--accent));
 }
 
 .card:hover .card__button svg {

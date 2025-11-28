@@ -5,13 +5,11 @@ import Features from "@/components/Features/Features";
 import FeaturedProducts from "@/components/FeaturedProducts/FeaturedProducts";
 import Testimonials from "@/components/Testimonials/Testimonials";
 import PromoBanner from "@/components/PromoBanner/PromoBanner";
-import { ToastContainer } from "react-toastify";
 import { motion } from "framer-motion";
 
 export default function Home() {
   return (
     <div className="bg-base-300">
-      <ToastContainer position="top-right" autoClose={3000} />
       <motion.div
         initial={{ opacity: 0, y: -30 }}
         animate={{ opacity: 1, y: 0 }}

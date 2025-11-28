@@ -1,15 +1,16 @@
+/* globals.css: D:\PHW\NextJS-project\e-commerce-client\src\app\globals.css */
 @import "tailwindcss";
 @plugin "daisyui";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-  --yellow: #facc15;
-  --yellow-dark: #d97706;
-  --shade: #f59e0b;
-  --red: #ef4444;
-  --pink: #ec4899;
-  --violate: #8b5cf6;
+  --primary: #1a73e8;
+  --accent: #00c4ff;
+  --soft-accent: #b9f3ff;
+  --primary-neutral: #39424e;
+  --light-neutral: #f5f7fa;
+  --soft-gray: #e2e6ea;
+  --carbon-gray: #202124;
+  --gold-tint: #f5c16c;
 }
 
 @theme inline {
@@ -19,41 +20,31 @@
   --font-mono: var(--font-geist-mono);
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+.poppins {
+  font-family: var(--font-poppins);
 }
 
-.bg-prime {
-  background: var(--yellow);
+.inter {
+  font-family: var(--font-inter);
 }
 
-.bg-second {
-  background: var(--yellow-dark);
+.bg-primary-gradient {
+  background: linear-gradient(135deg, var(--primary), var(--accent));
 }
 
-.bg-gradian {
-  background: linear-gradient(135deg, #facc15, #f59e0b, #d97706);
+.bg-soft-gradient {
+  background: linear-gradient(135deg, var(--soft-accent), var(--accent));
 }
 
-.text-prime {
-  color: var(--yellow);
-}
-
-.text-second {
-  color: var(--yellow-dark);
-}
-
-.text-gradient {
-  background: linear-gradient(135deg, #facc15, #f59e0b, #d97706);
+.text-primary-gradient {
+  background: linear-gradient(135deg, var(--primary), var(--accent));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
-.text-gradient2 {
-  background: linear-gradient(135deg, #ef4444, #8b5cf6);
+.text-soft-gradient {
+  background: linear-gradient(135deg, var(--accent), var(--soft-accent));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;

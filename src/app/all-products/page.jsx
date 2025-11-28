@@ -46,25 +46,26 @@ const AllProducts = () => {
   }
 
   return (
-    <div className="w-11/12 mx-auto mt-10">
-      <h1 className="text-3xl md:text-4xl font-bold mb-6 text-[#8b5cf6] border-b-2 pb-2">
+    <div className="w-11/12 mx-auto my-10">
+      <h1 className="text-3xl md:text-4xl font-bold mb-1 text-primary-gradient poppins">
         {category ? `${category} Products` : "All Products"}
       </h1>
+      <div className="w-full h-0.5 bg-primary-gradient rounded-2xl mb-5"></div>
       <form
         onSubmit={handleSearchSubmit}
-        className="flex flex-col sm:flex-row items-center gap-4 mb-6"
+        className="grid ms:grid-rows-2 md:grid-cols-12 items-center gap-4 mb-6"
       >
         <input
           type="text"
           placeholder="Search products..."
           value={search}
           onChange={handleSearchChange}
-          className="px-4 py-2 border rounded-lg w-full sm:w-1/2 outline-none focus:ring-2 focus:ring-indigo-500"
+          className="inter md:col-span-9 px-4 py-2 border border-[#39424e50] rounded-lg outline-none focus:ring focus:ring-primary focus:border-none"
         />
         <select
           value={category}
           onChange={handleCategoryChange}
-          className="px-4 py-2 border rounded-lg w-full sm:w-1/4 outline-none focus:ring-2 focus:ring-indigo-500"
+          className="inter md:col-span-3 px-4 py-2 border border-[#39424e50] rounded-lg outline-none focus:ring focus:ring-primary focus:border-none"
         >
           <option value="">All Categories</option>
           {categories.map((cat) => (
@@ -73,13 +74,8 @@ const AllProducts = () => {
             </option>
           ))}
         </select>
-        <button
-          type="submit"
-          className="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition"
-        >
-          Search
-        </button>
       </form>
+
       {isLoading && (
         <div className="flex justify-center py-10">
           <Loader />

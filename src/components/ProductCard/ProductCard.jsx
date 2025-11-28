@@ -36,22 +36,27 @@ const ProductCard = ({ product }) => {
             />
           </div>
           <div className="flex justify-between items-center mt-2">
-            <p className="card__title">{title}</p>
+            <p className="card__title poppins">{title}</p>
           </div>
           <div className="flex justify-between items-center mt-1">
             <p className="card__description">
-              Brand: <span className="font-bold">{brand}</span>
+              <span className="inter">Brand: </span>
+              <span className="font-bold poppins">{brand}</span>
             </p>
             <p className="card__description">
-              Category: <span className="font-bold">{category}</span>
+              <span className="inter">Category: </span>
+              <span className="font-bold poppins">{category}</span>
             </p>
           </div>
           <div className="card__footer mt-3 flex justify-between items-center">
-            <div className="card__quantity">
-              $<span className="font-bold">{price}</span>
+            <div className="card__price poppins">
+              <span className="font-bold">
+                {price}
+                <sup>$</sup>
+              </span>
             </div>
             <div className="flex space-x-2">
-              <Link href={`/product/${_id}`} className="card__button">
+              <Link href={`/product/${_id}`} className="card__button poppins">
                 View Details
               </Link>
             </div>

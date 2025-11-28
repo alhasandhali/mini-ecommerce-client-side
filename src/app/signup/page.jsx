@@ -49,20 +49,18 @@ const Signup = () => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100 px-4">
-      <div className="w-full max-w-md bg-white shadow-xl rounded-2xl p-8 relative">
+    <div className="min-h-screen flex items-center justify-center bg-primary-gradient p-6 inter">
+      <div className="w-full max-w-md bg-white/20 backdrop-blur-xl shadow-2xl rounded-2xl p-8 border border-white/70">
         {signupMutation.isLoading && <Loader />}
-        <h2 className="text-3xl font-bold text-gray-800 text-center mb-6">
+        <h2 className="poppins text-3xl font-bold text-white text-center mb-6">
           Create an Account
         </h2>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-gray-700 font-medium mb-1">
-              Full Name
-            </label>
+            <label className="text-white">Full Name</label>
             <input
               name="name"
-              className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
+              className="w-full mt-1 px-4 py-3 rounded-xl bg-white/30 text-white placeholder-white/70 outline-none focus:ring-2 focus:ring-white"
               placeholder="John Doe"
               value={form.name}
               onChange={handleChange}
@@ -70,13 +68,11 @@ const Signup = () => {
             />
           </div>
           <div>
-            <label className="block text-gray-700 font-medium mb-1">
-              Email
-            </label>
+            <label className="text-white">Email</label>
             <input
               name="email"
               type="email"
-              className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
+              className="w-full mt-1 px-4 py-3 rounded-xl bg-white/30 text-white placeholder-white/70 outline-none focus:ring-2 focus:ring-white"
               placeholder="example@mail.com"
               value={form.email}
               onChange={handleChange}
@@ -84,12 +80,10 @@ const Signup = () => {
             />
           </div>
           <div>
-            <label className="block text-gray-700 font-medium mb-1">
-              Username
-            </label>
+            <label className="text-white">Username</label>
             <input
               name="username"
-              className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
+              className="w-full mt-1 px-4 py-3 rounded-xl bg-white/30 text-white placeholder-white/70 outline-none focus:ring-2 focus:ring-white"
               placeholder="Username123"
               value={form.username}
               onChange={handleChange}
@@ -97,13 +91,11 @@ const Signup = () => {
             />
           </div>
           <div>
-            <label className="block text-gray-700 font-medium mb-1">
-              Password
-            </label>
+            <label className="text-white">Password</label>
             <input
               name="password"
               type="password"
-              className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
+              className="w-full mt-1 px-4 py-3 rounded-xl bg-white/30 text-white placeholder-white/70 outline-none focus:ring-2 focus:ring-white"
               placeholder="******"
               value={form.password}
               onChange={handleChange}
@@ -113,15 +105,15 @@ const Signup = () => {
           <button
             type="submit"
             disabled={signupMutation.isLoading}
-            className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-lg transition"
+            className="poppins w-full py-3 rounded-xl bg-white text-black font-semibold text-lg hover:bg-white/90 transition-all duration-300 cursor-pointer"
           >
             {signupMutation.isLoading ? "Creating..." : "Create Account"}
           </button>
         </form>
         <div className="flex items-center gap-3 my-6">
-          <div className="flex-1 h-px bg-gray-300"></div>
-          <span className="text-gray-500 text-sm">OR</span>
-          <div className="flex-1 h-px bg-gray-300"></div>
+          <div className="flex-1 h-px bg-white"></div>
+          <span className="text-white text-sm">OR</span>
+          <div className="flex-1 h-px bg-white"></div>
         </div>
         <button
           onClick={handleGoogleLogin}
@@ -156,11 +148,11 @@ const Signup = () => {
           </svg>
           Login with Google
         </button>
-        <p className="text-center text-gray-600 text-sm mt-4">
+        <p className="text-center text-white font-light mt-6">
           Already have an account?{" "}
           <a
-            href="/login"
-            className="text-blue-600 font-medium hover:underline"
+            href="/signup"
+            className="font-semibold text-white hover:underline"
           >
             Login
           </a>

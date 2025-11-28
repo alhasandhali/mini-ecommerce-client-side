@@ -5,7 +5,5 @@
 }
 
 li a:hover {
-  color: var(--violate);
-  transition: all 0.5s ease;
   background: transparent;
 }
