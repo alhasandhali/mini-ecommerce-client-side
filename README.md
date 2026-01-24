@@ -1,165 +1,119 @@
-# Next.js App — Product Management
+# TechTrove - Premium E-Commerce Platform
 
-A sleek, responsive product-management application built with **Next.js (App Router)**, **NextAuth.js**, and a simple **Express.js backend**.  
-The project includes **public pages**, **protected routes**, **Google + Credentials login**, and a polished UI built for clarity and smooth interaction.
-
----
-
-## 🚀 Features
-
-### ✅ Public Pages
-
-- Landing Page with 7 structured sections
-- Item List Page
-- Item Details Page
-- Login/Register Page (Google + Credentials)
-
-### 🔐 Protected Pages
-
-- **Add Product** – secure product creation form
-- **Manage Products** – list, view, delete, update products
-
-### ✨ UI Highlights
-
-- Fully responsive (mobile → tablet → desktop)
-- Uniform cards & grids
-- Clean forms with inline validation
-- Hover & focus states across UI
-- Sticky navbar + user dropdown after login
-- Optional micro-animations
+TechTrove is a sophisticated, high-performance product management and e-commerce platform built with the latest **Next.js 16 (App Router)** and **Tailwind CSS 4**. It features a stunning, premium UI with smooth animations, secure authentication, and a robust product management system.
 
 ---
 
-## 🏗️ Tech Stack
+## 🔗 Project Links
 
-### Frontend
-
-- Next.js (App Router)
-- NextAuth.js
-- React
-- Tailwind CSS
-- React Hot Toast (optional)
-
-### Backend
-
-- Express.js server
-- Minimal REST product API
+- **Live Deployment:** [https://techtrove-ahd.vercel.app/](https://techtrove-ahd.vercel.app/)
+- **Client-Side Repository:** [https://github.com/alhasandhali/mini-ecommerce-client-side](https://github.com/alhasandhali/mini-ecommerce-client-side)
+- **Server-Side Repository:** [https://github.com/alhasandhali/mini-ecommerce-server-side](https://github.com/alhasandhali/mini-ecommerce-server-side)
 
 ---
 
-## 🖥️ Live Demo
+## ✨ Key Features
 
-Add your live link here:  
-**https://techtrove-ahd.vercel.app/**
+### 🛍️ Shopping Experience
+- **Dynamic Product Catalog:** Browse a categorized list of high-quality tech products.
+- **Detailed Product Views:** In-depth information, specifications, and imagery for every item.
+- **Premium UI/UX:** Built with glassmorphism effects, curated color palettes, and responsive layouts.
+
+### 🔐 Security & Authentication
+- **NextAuth Integration:** Secure login via Google OAuth and traditional credentials.
+- **Protected Routes:** Administrative features like adding or managing products are restricted to authorized users.
+
+### 🛠️ Product Management
+- **Full CRUD Support:** Add, View, Update, and Delete products seamlessly.
+- **Inventory Control:** Manage stock levels and product details through a dedicated dashboard.
+
+### 🎨 Design & Animation
+- **Tailwind CSS 4:** Utilizing the latest styling engine for maximum performance.
+- **Framer Motion:** Smooth micro-interactions and page transitions.
+- **Responsive Design:** Optimized for mobile, tablet, and desktop environments.
 
 ---
 
-## 📘 Setup & Installation
+## 🚀 Tech Stack
 
-### 1. Clone the repository
+- **Frontend:** Next.js 16, React 19, Tailwind CSS 4, DaisyUI 5
+- **State & Data:** TanStack Query (React Query), Axios
+- **Authentication:** NextAuth.js
+- **Animations:** Framer Motion, Swiper.js
+- **Form Handling:** React Hook Form
 
+---
+
+## 📁 Project Structure
+
+```text
+e-commerce-client/
+├── public/              # Static assets (images, icons, etc.)
+├── src/
+│   ├── app/             # Next.js App Router (Pages & Layouts)
+│   │   ├── about/       # About Page
+│   │   ├── add-product/ # Product Creation Page (Protected)
+│   │   ├── all-products/# Full Catalog Page
+│   │   ├── api/         # Next.js API Routes
+│   │   ├── contact/     # Contact Information Page
+│   │   ├── login/       # Authentication (Login)
+│   │   ├── signup/      # Authentication (Sign Up)
+│   │   ├── manage-products/ # Product Admin Dashboard
+│   │   ├── product/     # Dynamic Product Detail Pages
+│   │   ├── layout.jsx   # Root Layout
+│   │   ├── page.jsx     # Homepage
+│   │   └── globals.css  # Global Stylings & Tailwind Config
+│   ├── components/      # Reusable UI Components
+│   │   ├── Banner/      # Hero Sections
+│   │   ├── FeaturedProducts/
+│   │   ├── Navbar/      # Sticky Navigation with User Menu
+│   │   ├── ProductCard/ # Responsive Product Items
+│   │   ├── Footer/      # Site-wide Footer
+│   │   └── ...          # Other UI Elements
+│   └── proxy.js         # API Proxy configuration
+├── package.json         # Dependencies & Scripts
+└── tailwind.config.js   # Tailwind Configuration
+```
+
+---
+
+## 🛠️ Installation & Setup
+
+### 1. Clone the Repository
 ```bash
 git clone https://github.com/alhasandhali/mini-ecommerce-client-side.git
-git clone https://github.com/alhasandhali/mini-ecommerce-server-side.git
+cd mini-ecommerce-client-side
 ```
 
-## 📘 Setup & Installation
-
-### 2. Install dependencies
-
+### 2. Install Dependencies
 ```bash
 npm install
 ```
 
-```bash
-Copy code
-{
-  "name": "e-commerce",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "eslint"
-  },
-  "dependencies": {
-    "@emailjs/browser": "^4.4.1",
-    "@tanstack/react-query": "^5.90.11",
-    "axios": "^1.13.2",
-    "bcryptjs": "^3.0.3",
-    "next": "16.0.3",
-    "next-auth": "^4.24.13",
-    "react": "19.2.0",
-    "react-dom": "19.2.0",
-    "react-hook-form": "^7.66.1",
-    "react-icons": "^5.5.0",
-    "react-responsive-carousel": "^3.2.23",
-    "react-spinners": "^0.17.0",
-    "react-toastify": "^11.0.5",
-    "swiper": "^9.4.1"
-  },
-  "devDependencies": {
-    "@tailwindcss/postcss": "^4",
-    "babel-plugin-react-compiler": "1.0.0",
-    "daisyui": "^5.5.5",
-    "eslint": "^9",
-    "eslint-config-next": "16.0.3",
-    "tailwindcss": "^4"
-  }
-}
-```
+### 3. Environment Variables
+Create a `.env` file in the root directory and add the following:
 
-### 3. Create environment variables
-
-Create a .env.local file:
-
-```bash
-Copy code
-NEXTAUTH_SECRET=your_secret
+```env
+GOOGLE_CLIENT_ID=your_google_client_id
+GOOGLE_CLIENT_SECRET=your_google_client_secret
 NEXTAUTH_URL=http://localhost:3000
-
-GOOGLE_CLIENT_ID=your_id
-GOOGLE_CLIENT_SECRET=your_secret
-BACKEND_URL=http://localhost:5000
+NEXTAUTH_SECRET=your_nextauth_secret_any_random_string
 ```
 
-### 4. Run the Express backend
-
+### 4. Run the Development Server
 ```bash
-Copy code
-cd express-server
-npm install
 npm run dev
 ```
 
-### 5. Start the Next.js frontend
+The application will be available at [http://localhost:3000](http://localhost:3000).
 
-```bash
-Copy code
-npm run dev
-```
+---
 
-### 6. Start the Next.js backend
+## 👨‍💻 Developer Information
 
-```bash
-Copy code
-nodemon index.js
-```
+Developed with ❤️ by **Alhasan Dhali**. 
 
-Your app will be live at:
+---
 
-```bash
-Copy code
-http://localhost:3000
-```
-
-## 🛠️ API Endpoints (Express)
-
-### Method Endpoint Purpose
-
-- GET /products Fetch all products
-- POST /products Add new product
-- GET /products/:id Product details
-- DELETE /products/:id Delete product
-- PUT /products/:id Update product (optional)
+## 📝 License
+This project is licensed under the MIT License.

@@ -1,27 +1,20 @@
 import React from "react";
 import { ClipLoader } from "react-spinners";
 
-const Loader = ({ loading }) => {
+const Loader = ({ fullPage = false, size = 50 }) => {
+  if (fullPage) {
+    return (
+      <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-white/80 backdrop-blur-sm">
+        <ClipLoader color="#0ea5e9" loading={true} size={size} />
+      </div>
+    );
+  }
+
   return (
-    <div style={styles.overlay}>
-      <ClipLoader color="#36d7b7" loading={loading} size={50} />
+    <div className="flex items-center justify-center p-4">
+      <ClipLoader color="#0ea5e9" loading={true} size={size} />
     </div>
   );
-};
-
-const styles = {
-  overlay: {
-    position: "fixed",
-    top: 0,
-    left: 0,
-    width: "100vw",
-    height: "100vh",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "rgba(255, 255, 255, 0.8)",
-    zIndex: 9999,
-  },
 };
 
 export default Loader;

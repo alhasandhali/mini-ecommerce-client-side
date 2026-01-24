@@ -1,23 +1,70 @@
-/* globals.css: D:\PHW\NextJS-project\e-commerce-client\src\app\globals.css */
 @import "tailwindcss";
 @plugin "daisyui";
 
 :root {
-  --primary: #1a73e8;
-  --accent: #00c4ff;
-  --soft-accent: #b9f3ff;
-  --primary-neutral: #39424e;
-  --light-neutral: #f5f7fa;
-  --soft-gray: #e2e6ea;
-  --carbon-gray: #202124;
-  --gold-tint: #f5c16c;
+  --primary: #2563eb;
+  --primary-dark: #1d4ed8;
+  --accent: #0ea5e9;
+  --accent-light: #7dd3fc;
+  --background: #f8fafc;
+  --foreground: #0f172a;
+  --card: #ffffff;
+  --card-foreground: #1e293b;
+  --border: #e2e8f0;
+  --input: #f1f5f9;
+  --ring: #3b82f6;
+  
+  /* Gradients */
+  --gradient-primary: linear-gradient(135deg, #2563eb 0%, #0ea5e9 100%);
+  --gradient-surface: linear-gradient(135deg, #ffffff 0%, #f1f5f9 100%);
+  --gradient-dark: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
 }
 
-@theme inline {
+[data-theme="dark"] {
+  --background: #020617;
+  --foreground: #f8fafc;
+  --card: #1e293b;
+  --card-foreground: #f1f5f9;
+  --border: #334155;
+  --input: #1e293b;
+}
+
+@theme {
+  --color-primary: var(--primary);
+  --color-primary-dark: var(--primary-dark);
+  --color-accent: var(--accent);
+  --color-accent-light: var(--accent-light);
+  
+  /* DaisyUI 5 Color Mapping */
+  --p: var(--primary);
+  --p-nc: 0 0% 100%;
+  --a: var(--accent);
+  
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui;
+  --font-display: var(--font-poppins), ui-sans-serif, system-ui;
+  
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-border: var(--border);
+}
+
+/* Ensure font variables are active */
+:root {
+  --font-inter: "Inter", sans-serif;
+  --font-poppins: "Poppins", sans-serif;
+}
+
+/* Base reset */
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+  font-family: var(--font-inter), system-ui, sans-serif;
+  background-color: var(--background);
+  color: var(--foreground);
+  scroll-behavior: smooth;
 }
 
 .poppins {
@@ -28,24 +75,49 @@
   font-family: var(--font-inter);
 }
 
-.bg-primary-gradient {
-  background: linear-gradient(135deg, var(--primary), var(--accent));
+/* Premium Utilities */
+.glass {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
-.bg-soft-gradient {
-  background: linear-gradient(135deg, var(--soft-accent), var(--accent));
+.dark .glass {
+  background: rgba(15, 23, 42, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.bg-primary-gradient {
+  background: var(--gradient-primary);
 }
 
 .text-primary-gradient {
-  background: linear-gradient(135deg, var(--primary), var(--accent));
+  background: var(--gradient-primary);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
-.text-soft-gradient {
-  background: linear-gradient(135deg, var(--accent), var(--soft-accent));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+.card-shadow {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.card-shadow:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+.btn-premium {
+  @apply relative overflow-hidden transition-all duration-300 active:scale-95;
+}
+
+.btn-premium::after {
+  content: '';
+  @apply absolute inset-0 bg-white/20 translate-y-full transition-transform duration-300;
+}
+
+.btn-premium:hover::after {
+  @apply translate-y-0;
 }

@@ -9,7 +9,7 @@ import { motion } from "framer-motion";
 
 export default function Home() {
   return (
-    <div className="bg-base-300">
+    <main className="flex flex-col min-h-screen bg-slate-50">
       <motion.div
         initial={{ opacity: 0, y: -30 }}
         animate={{ opacity: 1, y: 0 }}
@@ -17,6 +17,7 @@ export default function Home() {
       >
         <Banner />
       </motion.div>
+
       <motion.div
         initial={{ opacity: 0, x: -50 }}
         whileInView={{ opacity: 1, x: 0 }}
@@ -25,6 +26,7 @@ export default function Home() {
       >
         <FeaturedProducts />
       </motion.div>
+
       <motion.div
         initial={{ opacity: 0, x: 50 }}
         whileInView={{ opacity: 1, x: 0 }}
@@ -35,6 +37,7 @@ export default function Home() {
       </motion.div>
 
       <Testimonials />
+
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -43,6 +46,6 @@ export default function Home() {
       >
         <PromoBanner />
       </motion.div>
-    </div>
+    </main>
   );
 }

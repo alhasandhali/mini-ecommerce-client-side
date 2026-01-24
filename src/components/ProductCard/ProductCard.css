@@ -1,6 +1,6 @@
 /* From Uiverse.io by SachinKumar666 */
 
-.card {
+.vibe-card {
   --card-bg: linear-gradient(135deg, #1a73e835, #00c4ff35, #b9f3ff35);
   --card-accent: #7c3aed;
   --card-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
@@ -18,7 +18,7 @@
     Ubuntu, Cantarell, sans-serif;
 }
 
-.card__shine {
+.vibe-card__shine {
   position: absolute;
   inset: 0;
   background: linear-gradient(
@@ -31,7 +31,7 @@
   transition: opacity 0.3s ease;
 }
 
-.card__glow {
+.vibe-card__glow {
   position: absolute;
   inset: -10px;
   background: radial-gradient(
@@ -43,7 +43,7 @@
   transition: opacity 0.5s ease;
 }
 
-.card__content {
+.vibe-card__content {
   padding: 1.25em;
   height: 100%;
   display: flex;
@@ -53,7 +53,7 @@
   z-index: 2;
 }
 
-.card__badge {
+.vibe-card__badge {
   position: absolute;
   top: 12px;
   right: 12px;
@@ -68,7 +68,7 @@
   transition: all 0.4s ease 0.1s;
 }
 
-.card__image {
+.vibe-card__image {
   width: 100%;
   background: white;
   border-radius: 12px;
@@ -77,7 +77,7 @@
   overflow: hidden;
 }
 
-.card__image::after {
+.vibe-card__image::after {
   content: "";
   position: absolute;
   inset: 0;
@@ -96,13 +96,13 @@
   opacity: 0.5;
 }
 
-.card__text {
+.vibe-card__text {
   display: flex;
   flex-direction: column;
   gap: 0.25em;
 }
 
-.card__title {
+.vibe-card__title {
   color: var(--primary-neutral);
   font-size: 1.1em;
   margin: 0;
@@ -110,7 +110,7 @@
   transition: all 0.3s ease;
 }
 
-.card__description {
+.vibe-card__description {
   color: var(--primary-neutral);
   font-size: 0.75em;
   margin: 0;
@@ -118,21 +118,21 @@
   transition: all 0.3s ease;
 }
 
-.card__footer {
+.vibe-card__footer {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-top: auto;
 }
 
-.card__price {
+.vibe-card__price {
   color: var(--primary-neutral);
   font-weight: 400;
   font-size: 16px;
   transition: all 0.3s ease;
 }
 
-.card__button {
+.vibe-card__button {
   padding: 5px 12px;
   background: linear-gradient(135deg, var(--primary), var(--accent));
   border-radius: 15px;
@@ -146,7 +146,7 @@
 }
 
 /* Hover Effects */
-.card:hover {
+.vibe-card:hover {
   transform: translateY(-10px);
   box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
     0 10px 10px -5px rgba(0, 0, 0, 0.04);
@@ -154,27 +154,27 @@
   background: linear-gradient(135deg, #1a73e825, #00c4ff25, #b9f3ff25);
 }
 
-.card:hover .card__shine {
+.vibe-card:hover .vibe-card__shine {
   opacity: 1;
   animation: shine 3s infinite;
 }
 
-.card:hover .card__glow {
+.vibe-card:hover .vibe-card__glow {
   opacity: 1;
 }
 
-.card:hover .card__badge {
+.vibe-card:hover .vibe-card__badge {
   transform: scale(1);
   opacity: 1;
   z-index: 1;
 }
 
-.card:hover .card__image {
+.vibe-card:hover .vibe-card__image {
   transform: translateY(-5px) scale(1.03);
   box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
 }
 
-.card:hover .card__title {
+.vibe-card:hover .vibe-card__title {
   background: linear-gradient(135deg, var(--primary), var(--accent));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -182,13 +182,13 @@
   transform: translateX(2px);
 }
 
-.card:hover .card__description {
+.vibe-card:hover .vibe-card__description {
   opacity: 1;
   transform: translateX(2px);
 }
 
-.card:hover .card__price,
-.card:hover sup {
+.vibe-card:hover .vibe-card__price,
+.vibe-card:hover sup {
   background: linear-gradient(135deg, var(--primary), var(--accent));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -197,18 +197,18 @@
   font-weight: 700;
 }
 
-.card:hover .card__button {
+.vibe-card:hover .vibe-card__button {
   transform: scale(1);
   box-shadow: 0 0 0 4px #1a73e845;
   background: linear-gradient(135deg, var(--primary), var(--accent));
 }
 
-.card:hover .card__button svg {
+.vibe-card:hover .vibe-card__button svg {
   animation: pulse 1.5s infinite;
 }
 
 /* Active State */
-.card:active {
+.vibe-card:active {
   transform: translateY(-5px) scale(0.98);
 }
 
