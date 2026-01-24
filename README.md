@@ -1,5 +1,7 @@
 # TechTrove - Premium E-Commerce Platform
 
+![TechTrove Banner](public/home-page.png)
+
 TechTrove is a sophisticated, high-performance product management and e-commerce platform built with the latest **Next.js 16 (App Router)** and **Tailwind CSS 4**. It features a stunning, premium UI with smooth animations, secure authentication, and a robust product management system.
 
 ---
